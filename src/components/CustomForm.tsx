@@ -66,6 +66,7 @@ export const CustomForm = (
 
 		if (isValid(formData)) {
 			onSubmit(formData);
+			event.target.reset();
 		}
 	};
 
