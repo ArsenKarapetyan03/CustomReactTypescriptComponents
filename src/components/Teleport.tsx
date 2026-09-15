@@ -18,7 +18,7 @@ const Teleport = (
 	useLayoutEffect(() => {
 		const element = document.querySelector(to) || document.body;
 		setMountedElement(element);
-	})
+	},[to])
 
 	if (!mountedElement) return null;
 
