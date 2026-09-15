@@ -1,5 +1,6 @@
 import { type HTMLAttributes, useState } from "react";
 import { ChevronRight } from "lucide-react";
+import { cn } from "../../lib/utils.ts";
 
 interface Panel {
 	title: string;
@@ -50,7 +51,11 @@ export function CollapsiblePanel(
 				return (
 					<div
 						key={i}
-						className={`text-${size} overflow-hidden rounded-lg border border-zinc-300`}
+						className={cn(
+							`text-${size} overflow-hidden border border-zinc-300`,
+							!i ? "rounded-tr-lg rounded-tl-lg" : "",
+							i == panels.length - 1 ? "rounded-br-lg rounded-bl-lg" : "",
+						)}
 					>
 						<button
 							type="button"
