@@ -46,7 +46,7 @@ export const CustomButton = (
 
 	const buttonProps: ButtonHTMLAttributes<HTMLButtonElement> = {
 		...props,
-		onClick: handleClick,
+		...(onClick ? {onClick: handleClick} : {}),
 		onAnimationEnd: () => setIsClicked(false)
 	};
 
