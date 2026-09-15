@@ -2,6 +2,7 @@ import { type ReactNode } from "react";
 import { cn } from "../../lib/utils.ts";
 
 interface CustomDrawerProps {
+	title: string;
 	open: boolean;
 	setOpen: (open: boolean) => void;
 	placement?: "top" | "bottom" | "left" | "right";
@@ -11,6 +12,7 @@ interface CustomDrawerProps {
 
 export const CustomDrawer = (
 	{
+		title,
 		open,
 		setOpen,
 		placement = "right",
@@ -55,6 +57,15 @@ export const CustomDrawer = (
 				)}
 				style={sizeStyle}
 			>
+				<div className="flex items-center justify-between border-b p-4">
+					<h2 className="text-lg font-semibold">{title}</h2>
+					<button
+						onClick={() => setOpen(false)}
+						className="rounded-md p-2 hover:bg-gray-100"
+					>
+						✕
+					</button>
+				</div>
 				{children}
 			</div>
 		</>

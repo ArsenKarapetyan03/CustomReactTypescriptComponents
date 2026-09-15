@@ -188,24 +188,14 @@ function App() {
 
 
 			<CustomDrawer
-				// placement="bottom"
+				title={"Drawer title"}
 				size={400}
 				open={openDrawer}
 				setOpen={setOpenDrawer}
+				// placement="bottom"
 			>
-				<div className="flex h-full flex-col">
-					<div className="flex items-center justify-between border-b p-4">
-						<h2 className="text-lg font-semibold">My Drawer</h2>
-						<button
-							onClick={() => setOpenDrawer(false)}
-							className="rounded-md p-2 hover:bg-gray-100"
-						>
-							✕
-						</button>
-					</div>
-					<div className="flex-1 overflow-y-auto p-4">
-						Drawer content
-					</div>
+				<div className="flex-1 h-full overflow-y-auto p-4">
+					Drawer content
 				</div>
 			</CustomDrawer>
 
