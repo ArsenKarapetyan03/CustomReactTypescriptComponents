@@ -1,7 +1,7 @@
 import { type InputHTMLAttributes, type ReactNode, type SubmitEvent, useState } from "react";
+import type { LucideIcon } from "lucide-react";
 import { cn } from "../../lib/utils.ts";
 import { CustomButton } from "./CustomButton.tsx";
-import type { LucideIcon } from "lucide-react";
 
 type Size = "sm" | "md" | "lg";
 
@@ -15,9 +15,8 @@ interface Field {
 
 interface CustomFormProps {
 	title: string;
-	fields: Field[];
-
 	description?: string;
+	fields: Field[];
 	size?: Size;
 	className?: string;
 	child?: ReactNode;
@@ -56,12 +55,15 @@ export const CustomForm = (
 				}
 			}
 		})
+
 		setErrors(newErrors);
+
 		return Object.keys(newErrors).length === 0;
 	}
 
 	const handleSubmit = (event: SubmitEvent<HTMLFormElement>) => {
 		event.preventDefault();
+
 		const formData = new FormData(event.currentTarget);
 
 		if (isValid(formData)) {
@@ -74,13 +76,24 @@ export const CustomForm = (
 		setErrors({});
 	};
 
-	const handleInputChange = (fieldName: string) => {
-		if (errors[fieldName]) {
+	const handleInputChange = (fieldName: string, value: string) => {
+		const field = fields.find(f => f.name === fieldName);
+
 			setErrors(prevState => {
-				const {[fieldName]: _, ...updatedErrors} = prevState;
+				const updatedErrors = {...prevState}
+
+				if (field?.validate) {
+					const errorMessage = field.validate(value)
+
+					if (errorMessage) {
+						updatedErrors[field.name] = errorMessage;
+					} else {
+						delete updatedErrors[field.name];
+					}
+				}
 				return updatedErrors;
 			});
-		}
+
 	}
 
 	return (
@@ -128,7 +141,7 @@ export const CustomForm = (
 									{...field.props}
 									id={field.name}
 									name={field.name}
-									onChange={() => handleInputChange(field.name)}
+									onChange={(e) => handleInputChange(field.name, e.target.value)}
 									type={field.props.type ?? "text"}
 									placeholder={field.props.placeholder}
 									disabled={field.props.disabled}
