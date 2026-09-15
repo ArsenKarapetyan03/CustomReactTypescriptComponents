@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { cn } from "../../lib/utils.ts";
 import { X } from "lucide-react";
+import Teleport from "./Teleport.tsx";
 
 interface CustomNotificationProps {
 	message: {
@@ -70,7 +71,7 @@ export const CustomNotification = (
 	}
 
 	return (
-		<>
+		<Teleport>
 			<style>
 				{`
 					@keyframes notification-progress {
@@ -135,6 +136,6 @@ export const CustomNotification = (
 					</div>
 				)}
 			</div>
-		</>
+		</Teleport>
 	);
 };
