@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "../../lib/utils.ts";
 import { X } from "lucide-react";
 import Teleport from "./Teleport.tsx";
@@ -59,16 +59,28 @@ export const CustomNotification = (
 
 	const [open, setOpen] = useState(true);
 
-	let closeId: number
+	const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-	if (autoClose) {
-		closeId = setTimeout(() => setOpen(false), duration);
-	}
+	useEffect(() => {
+		if (autoClose && open) {
+			timerRef.current = setTimeout(() => {
+				setOpen(false);
+			}, duration);
+		}
+		return () => {
+			if (timerRef.current) clearTimeout(timerRef.current);
+		};
+	}, [autoClose, duration, open]);
 
 	const handleCloseButton = () => {
 		setOpen(false);
-		clearTimeout(closeId)
+
+		if (timerRef.current) {
+			clearTimeout(timerRef.current)
+		}
 	}
+
+	if (!open) return null;
 
 	return (
 		<Teleport>
@@ -86,11 +98,10 @@ export const CustomNotification = (
 			</style>
 
 			<div className={cn(
-				"fixed z-50 w-[calc(100%-2rem)] max-w-sm rounded-lg border shadow-lg " +
+				"fixed z-50 w-[calc(100%-2rem)] max-w-sm rounded-lg border shadow-lg ",
 				"animate-in fade-in slide-in-from-top-2 duration-200",
 				POSITION_STYLES[position],
 				TYPE_STYLES[type].container,
-				open ? "block" : "hidden",
 			)}
 			>
 				<div className="flex items-start gap-3 p-4">
