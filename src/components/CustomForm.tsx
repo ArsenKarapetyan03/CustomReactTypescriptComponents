@@ -1,6 +1,6 @@
 import { type InputHTMLAttributes, type ReactNode, type SubmitEvent, useState } from "react";
 import type { LucideIcon } from "lucide-react";
-import { cn } from "../../lib/utils.ts";
+import { cn } from "../lib/utils.ts";
 import { CustomButton } from "./CustomButton.tsx";
 
 type Size = "sm" | "md" | "lg";

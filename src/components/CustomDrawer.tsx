@@ -1,6 +1,6 @@
 import { type ReactNode } from "react";
-import { cn } from "../../lib/utils.ts";
-import Teleport from "./Teleport.tsx";
+import { cn } from "../lib/utils.ts";
+import { Teleport } from "../hooks/Teleport.tsx";
 
 interface CustomDrawerProps {
 	title: string;

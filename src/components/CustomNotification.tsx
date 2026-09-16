@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { cn } from "../../lib/utils.ts";
+import { cn } from "../lib/utils.ts";
 import { X } from "lucide-react";
-import Teleport from "./Teleport.tsx";
+import { Teleport } from "../hooks/Teleport.tsx";
 
 interface CustomNotificationProps {
 	message: {

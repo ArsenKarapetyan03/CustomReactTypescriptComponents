@@ -1,6 +1,6 @@
 import { type HTMLAttributes, useState } from "react";
 import { ChevronRight } from "lucide-react";
-import { cn } from "../../lib/utils.ts";
+import { cn } from "../lib/utils.ts";
 
 interface Panel {
 	title: string;

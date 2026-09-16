@@ -1,5 +1,5 @@
 import { useState, type ButtonHTMLAttributes, type MouseEvent, useRef } from "react";
-import { cn } from "../../lib/utils.ts";
+import { cn } from "../lib/utils.ts";
 
 interface CustomButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	variant?: "default" | "primary" | "dashed" | "text" | "link";
