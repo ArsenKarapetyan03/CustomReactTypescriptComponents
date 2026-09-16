@@ -1,4 +1,4 @@
-import { useState, type ButtonHTMLAttributes, type MouseEvent } from "react";
+import { useState, type ButtonHTMLAttributes, type MouseEvent, useRef } from "react";
 import { cn } from "../../lib/utils.ts";
 
 interface CustomButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -34,48 +34,45 @@ export const CustomButton = (
 ) => {
 
 	const [isClicked, setIsClicked] = useState(false);
+	const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-	const handleClick = (event: MouseEvent<HTMLButtonElement>) => {
-		onClick?.(event);
+	const handleClick = onClick
+		? (event: MouseEvent<HTMLButtonElement>) => {
+			onClick(event);
 
-		if (variant !== "text" && variant !== "link" && animation && !isClicked) {
-			setIsClicked(true);
-			setTimeout(() => setIsClicked(false), 300);
+			if (animation && variant !== "text" && variant !== "link") {
+				if (timeoutRef.current) {
+					clearTimeout(timeoutRef.current);
+				}
+
+				setIsClicked(false);
+
+				requestAnimationFrame(() => {
+					setIsClicked(true);
+				});
+
+				timeoutRef.current = setTimeout(() => {
+					setIsClicked(false);
+				}, 400);
+			}
 		}
-	};
-
-	const buttonProps: ButtonHTMLAttributes<HTMLButtonElement> = {
-		...props,
-		...(onClick ? {onClick: handleClick} : {}),
-		onAnimationEnd: () => setIsClicked(false)
-	};
+		: undefined
 
 	return (
-		<>
-			<style>{`
-				@keyframes custom-click-ping {
-					0% { transform: scale(1); opacity: 1; }
-					100% { transform: scaleY(1.4) scaleX(1.15); opacity: 0; }
-				}
-			`}</style>
-
 			<button
-				{...buttonProps}
+				{...props}
+				onClick={handleClick}
 				className={cn(
-					"relative max-w-xs cursor-pointer rounded-lg transition-all duration-300 ease-in-out isolate bg-transparent",
+					"relative max-w-xs cursor-pointer rounded-lg ring-0 ring-blue-500/60 duration-0 transition-all",
 					SIZES[size],
 					VARIANTS[variant],
+					animation && isClicked && "ring-8 ring-transparent duration-400 ease-out",
 					className
 				)}
 			>
-				{isClicked && (
-					<span className="absolute inset-0 -z-10 rounded-lg bg-blue-400/60 animate-[custom-click-ping_300ms_ease-in_1]"/>
-				)}
-
 				<span className="relative z-10 pointer-events-none">
 					{children}
 				</span>
 			</button>
-		</>
 	);
 };
