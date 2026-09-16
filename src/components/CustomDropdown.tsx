@@ -1,8 +1,9 @@
 import { type AnchorHTMLAttributes, useEffect, useRef, useState } from "react";
 import { ChevronRight } from "lucide-react";
 import { CustomButton } from "./CustomButton.tsx";
-import { cn } from "../../lib/utils.ts";
-import Teleport from "./Teleport.tsx";
+import { cn } from "../lib/utils.ts";
+import { useClickOutside } from "../hooks/useClickOutside.ts";
+import { Teleport } from "../hooks/Teleport.tsx";
 
 interface DropdownLink {
 	label: string;
@@ -27,7 +28,11 @@ export const CustomDropdown = (
 	}: CustomDropdownProps) => {
 
 	const [isOpen, setIsOpen] = useState(false);
-	const [dropdownCoords, setDropdownCoords] = useState({top: 0, left: 0, width: 0});
+	const [dropdownCoords, setDropdownCoords] = useState<{
+		top: number;
+		left: number;
+		width: number;
+	} | null>(null);
 	const triggerRef = useRef<HTMLSpanElement>(null);
 
 	const chevronRotation = isOpen
@@ -50,6 +55,8 @@ export const CustomDropdown = (
 			});
 		}
 	}
+
+	useClickOutside(triggerRef, ()=>setIsOpen(false));
 
 	useEffect(() => {
 		if (isOpen) {
@@ -82,7 +89,7 @@ export const CustomDropdown = (
 				</CustomButton>
 				</span>
 
-			{isOpen && (
+			{isOpen && dropdownCoords && (
 				<Teleport>
 					<ul
 						className={"absolute z-10 w-48 bg-white rounded-lg border border-gray-100 shadow-2xl"}
