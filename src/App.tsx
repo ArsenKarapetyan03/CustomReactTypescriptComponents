@@ -21,7 +21,7 @@ function App() {
 
 			<div>
 				<CustomButton onClick={() => setOpenDrawer(true)}>Default Button</CustomButton>
-				<CustomButton variant={"primary"}>Primary Button</CustomButton>
+				<CustomButton variant={"primary"} onClick={()=>{}}>Primary Button</CustomButton>
 				<CustomButton variant={"link"}>Link Button</CustomButton>
 				<CustomButton
 					size={"lg"}
@@ -39,10 +39,17 @@ function App() {
 				</CustomButton>
 			</div>
 
+			<EmptyState />
+			<EmptyState
+				message={"There is no data found"}
+				icon={PackageOpen}
+				className={"flex flex-row gap-2"}
+			/>
+
 			<CustomDropdown
 				title={"Dropdown menu"}
-				direction={"down"}
-				trigger={"hover"}
+				trigger={"click"}
+				// direction={"up"}
 				menuItems={[
 					{label: "1st item"},
 					{
@@ -70,14 +77,6 @@ function App() {
 					},
 				]}
 			/>
-
-			<EmptyState />
-			<EmptyState
-				message={"There is no data found"}
-				icon={PackageOpen}
-				className={"flex flex-row gap-2"}
-			/>
-
 
 			<CollapsiblePanel
 				defaultActivePanels={[1, 3]}
@@ -187,17 +186,19 @@ function App() {
 			/>
 
 
-			<CustomDrawer
-				title={"Drawer title"}
-				size={400}
-				open={openDrawer}
-				setOpen={setOpenDrawer}
-				// placement="bottom"
-			>
-				<div className="flex-1 h-full overflow-y-auto p-4">
-					Drawer content
-				</div>
-			</CustomDrawer>
+			<div className="w-7.5 h-7.5 overflow-hidden">
+				<CustomDrawer
+					title={"Drawer title"}
+					size={400}
+					open={openDrawer}
+					setOpen={setOpenDrawer}
+					// placement="bottom"
+				>
+					<div className="flex-1 h-full overflow-y-auto p-4">
+						Drawer content
+					</div>
+				</CustomDrawer>
+			</div>
 
 			<CustomModal
 				size={"lg"}
@@ -231,7 +232,7 @@ function App() {
 
 			<CustomForm
 				title={"Form title"}
-				onSubmit={()=>console.log("Submit")}
+				onSubmit={()=>alert("Submitted")}
 				child={<div>My content...</div>}
 				fields={
 					[
