@@ -84,19 +84,6 @@ export const CustomNotification = (
 
 	return (
 		<Teleport>
-			<style>
-				{`
-					@keyframes notification-progress {
-						from {
-							width: 100%;
-						}
-						to {
-							width: 0%;
-						}
-					}
-				`}
-			</style>
-
 			<div className={cn(
 				"fixed z-50 w-[calc(100%-2rem)] max-w-sm rounded-lg border shadow-lg ",
 				"animate-in fade-in slide-in-from-top-2 duration-200",
@@ -106,7 +93,8 @@ export const CustomNotification = (
 			>
 				<div className="flex items-start gap-3 p-4">
 					{/* Icon */}
-					<div className={cn("flex h-8 w-8 shrink-0 items-center justify-center rounded-full font-semibold", TYPE_STYLES[type].icon)}>
+					<div
+						className={cn("flex h-8 w-8 shrink-0 items-center justify-center rounded-full font-semibold", TYPE_STYLES[type].icon)}>
 						{TYPE_ICONS[type]}
 					</div>
 
@@ -141,7 +129,7 @@ export const CustomNotification = (
 						aria-hidden="true"
 					>
 						<div
-							className={"h-full bg-current opacity-30 animate-[notification-progress_linear_forwards]"}
+							className={"h-full bg-current opacity-30 animate-progress"}
 							style={{animationDuration: `${duration}ms`}}
 						/>
 					</div>
