@@ -28,7 +28,7 @@ export const CustomDropdown = (
 
 	const [isOpen, setIsOpen] = useState(false);
 	const [dropdownCoords, setDropdownCoords] = useState({top: 0, left: 0, width: 0});
-	const triggerRef = useRef<HTMLButtonElement>(null);
+	const triggerRef = useRef<HTMLSpanElement>(null);
 
 	const chevronRotation = isOpen
 		? direction === "up" ? "-rotate-90" : "rotate-90"
@@ -44,7 +44,7 @@ export const CustomDropdown = (
 		if (triggerRef.current) {
 			const rect = triggerRef.current.getBoundingClientRect();
 			setDropdownCoords({
-				top: direction === "down" ? rect.top + window.scrollY + rect.height : rect.top + window.scrollY,
+				top: direction === "down" ? rect.bottom + window.scrollY : rect.top + window.scrollY,
 				left: rect.left + window.scrollX,
 				width: rect.width,
 			});
@@ -69,12 +69,12 @@ export const CustomDropdown = (
 			onMouseEnter={() => trigger === "hover" && setIsOpen(true)}
 			onMouseLeave={() => trigger === "hover" && setIsOpen(false)}
 		>
-			<span ref={triggerRef} onClick={handleClick} className="inline-block">
+			<span ref={triggerRef} className="inline-block">
 				<CustomButton
 					type="button"
 					onClick={handleClick}
 					animation={false}
-					className="flex items-center gap-2 text-nowrap text-blue-600 hover:text-blue-800 transition-all duration-300"
+					className="flex items-center gap-2 text-nowrap text-blue-500 duration-200"
 				>
 					{title}
 
