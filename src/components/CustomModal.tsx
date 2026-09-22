@@ -13,7 +13,7 @@ interface CustomModalProps {
 
 	size?: "sm" | "md" | "lg";
 	variant?: "confirm" | "alert";
-	onClose?: () => void;
+	onClick?: () => void;
 }
 
 const SIZES = {
@@ -41,7 +41,7 @@ export const CustomModal = (
 		content,
 		size = "md",
 		variant = "confirm",
-		onClose,
+		onClick,
 	}: CustomModalProps) => {
 	const sizeStyles = SIZES[size];
 
@@ -69,7 +69,6 @@ export const CustomModal = (
 
 	const handleClose = () => {
 		setModalOpen(false);
-		onClose?.();
 	};
 
 	if (!mounted) {
