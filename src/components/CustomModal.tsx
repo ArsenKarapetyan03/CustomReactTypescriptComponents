@@ -13,7 +13,6 @@ interface CustomModalProps {
 
 	size?: "sm" | "md" | "lg";
 	variant?: "confirm" | "alert";
-	onClick?: () => void;
 }
 
 const SIZES = {
