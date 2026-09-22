@@ -41,7 +41,6 @@ export const CustomModal = (
 		content,
 		size = "md",
 		variant = "confirm",
-		onClick,
 	}: CustomModalProps) => {
 	const sizeStyles = SIZES[size];
 
