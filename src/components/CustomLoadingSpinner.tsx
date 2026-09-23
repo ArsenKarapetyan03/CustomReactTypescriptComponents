@@ -1,8 +1,11 @@
+import type { CSSProperties } from "react";
+
 interface CustomLoadingSpinnerProps {
 	description?: string;
 	variant?: "solid" | "dashed" | "dots";
 	size?: "sm" | "md" | "lg";
 	duration?: number | string;
+	colorClass?: string;
 }
 
 const SIZES = {
@@ -35,33 +38,45 @@ export const CustomLoadingSpinner = (
 		variant = "dots",
 		size = "md",
 		duration = "infinite",
-	}: CustomLoadingSpinnerProps) => {
+		colorClass = "text-blue-500",
+	}: CustomLoadingSpinnerProps
+) => {
+
+	const animationStyle = { animationIterationCount: duration };
 
 	return (
-		<div className={`flex flex-col items-center justify-center ${SIZES[size].gap}`}>
+		<div
+			className={`flex flex-col items-center justify-center ${SIZES[size].gap} ${colorClass}`}
+			style={{ "--spinner-color": "currentColor" } as CSSProperties}
+		>
 			{variant === "dots" ? (
 				<div
 					className={`relative animate-spin ${SIZES[size].spinner}`}
-					style={{animationIterationCount: duration}}
+					style={animationStyle}
 				>
-					<div className={`absolute top-0 left-1/2 -translate-x-1/2 rounded-full bg-blue-400 ${SIZES[size].dot}`}/>
-					<div className={`absolute top-1/2 right-0 -translate-y-1/2 rounded-full bg-blue-500 ${SIZES[size].dot}`}/>
-					<div className={`absolute top-1/2 left-0 -translate-y-1/2 rounded-full bg-blue-200 ${SIZES[size].dot}`}/>
-					<div className={`absolute bottom-0 left-1/2 -translate-x-1/2 rounded-full bg-blue-400 ${SIZES[size].dot}`}/>
+					<div className={`absolute top-0 left-1/2 -translate-x-1/2 rounded-full ${SIZES[size].dot}`} style={{ backgroundColor: "var(--spinner-color)", opacity: 0.3 }} />
+					<div className={`absolute top-1/2 right-0 -translate-y-1/2 rounded-full ${SIZES[size].dot}`} style={{ backgroundColor: "var(--spinner-color)", opacity: 0.6 }} />
+					<div className={`absolute top-1/2 left-0 -translate-y-1/2 rounded-full ${SIZES[size].dot}`} style={{ backgroundColor: "var(--spinner-color)", opacity: 0.8 }} />
+					<div className={`absolute bottom-0 left-1/2 -translate-x-1/2 rounded-full ${SIZES[size].dot}`} style={{ backgroundColor: "var(--spinner-color)" }} />
 				</div>
 			) : (
 				<div
 					className={`
-							${SIZES[size].borderSpinner} 
-							${variant === "dashed" ? "border-dashed" : "border-solid"} 
-							animate-spin rounded-full border-transparent border-t-blue-500 border-r-blue-500
-						`}
-					style={{animationIterationCount: duration}}
+						rounded-full animate-spin
+						${SIZES[size].borderSpinner} 
+						${variant === "dashed" ? "border-dashed" : "border-solid"} 
+					`}
+					style={{
+						...animationStyle,
+						borderColor: variant === "dashed" ? "var(--spinner-color)" : "transparent",
+						borderTopColor: variant === "solid" ? "var(--spinner-color)" : undefined,
+						borderRightColor: variant === "solid" ? "var(--spinner-color)" : undefined,
+					}}
 				/>
 			)}
 
 			{description && (
-				<p className={`text-blue-500 ${SIZES[size].text}`}>
+				<p className={`font-medium ${SIZES[size].text}`}>
 					{description}
 				</p>
 			)}
