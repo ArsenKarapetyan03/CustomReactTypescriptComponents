@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { type Dispatch, type SetStateAction, useEffect, useRef } from "react";
 import { cn } from "../lib/utils.ts";
 import { X } from "lucide-react";
 import { Teleport } from "../hooks/Teleport.tsx";
@@ -8,7 +8,8 @@ interface CustomNotificationProps {
 		title: string;
 		content: string;
 	};
-
+	open: boolean;
+	setOpen: Dispatch<SetStateAction<boolean>>;
 	type?: "info" | "success" | "warning" | "error";
 	position?: "top-left" | "top-right" | "bottom-left" | "bottom-right";
 	autoClose?: boolean;
@@ -51,13 +52,13 @@ const POSITION_STYLES = {
 export const CustomNotification = (
 	{
 		message,
+		open,
+		setOpen,
 		type = "info",
 		position = "top-right",
 		autoClose = true,
 		duration = 4000,
 	}: CustomNotificationProps) => {
-
-	const [open, setOpen] = useState(true);
 
 	const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
