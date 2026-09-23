@@ -69,7 +69,10 @@ export const CustomNotification = (
 			}, duration);
 		}
 		return () => {
-			if (timerRef.current) clearTimeout(timerRef.current);
+			if (timerRef.current) {
+				clearTimeout(timerRef.current);
+				timerRef.current = null;
+			}
 		};
 	}, [autoClose, duration, open]);
 
