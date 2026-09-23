@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --animate-progress: progress 3s linear forwards;
+  --animate-progress: progress linear forwards;
 }
 
 @keyframes progress {

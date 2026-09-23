@@ -15,13 +15,14 @@ function App() {
 
 	const [openDrawer, setOpenDrawer] = useState(false);
 	const [openModal, setOpenModal] = useState(false);
+	const [openNotification, setOpenNotification] = useState(false);
 
 	return (
 		<div className={"flex flex-col items-center gap-8"}>
 
 			<div>
 				<CustomButton onClick={() => setOpenDrawer(true)}>Default Button</CustomButton>
-				<CustomButton variant={"primary"} onClick={()=>{}}>Primary Button</CustomButton>
+				<CustomButton variant={"primary"} onClick={()=>setOpenNotification(true)}>Primary Button</CustomButton>
 				<CustomButton variant={"link"}>Link Button</CustomButton>
 				<CustomButton
 					size={"lg"}
@@ -133,6 +134,8 @@ function App() {
 						content: "Hello World!",
 					}
 				}
+				open={openNotification}
+				setOpen={setOpenNotification}
 				duration={2000}
 			/>
 			<CustomNotification
@@ -145,6 +148,8 @@ function App() {
 				type="warning"
 				position="top-left"
 				autoClose={false}
+				open={openNotification}
+				setOpen={setOpenNotification}
 			/>
 			<CustomNotification
 				message={
@@ -155,6 +160,8 @@ function App() {
 				}
 				type="success"
 				position="bottom-left"
+				open={openNotification}
+				setOpen={setOpenNotification}
 			/>
 			<CustomNotification
 				message={
@@ -166,6 +173,8 @@ function App() {
 				type="error"
 				position="bottom-right"
 				duration={5000}
+				open={openNotification}
+				setOpen={setOpenNotification}
 			/>
 
 			<CustomLoadingSpinner
