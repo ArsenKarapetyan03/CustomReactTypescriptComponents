@@ -169,19 +169,21 @@ function App() {
 			/>
 
 			<CustomLoadingSpinner
-				size={"lg"}
+				size={"sm"}
 				variant={"dashed"}
+				colorClass="text-yellow-500"
 				description={"Please wait..."}
 			/>
 			<CustomLoadingSpinner
-				size={"lg"}
+				size={"md"}
 				variant={"dots"}
-				duration={10}
+				colorClass="text-red-500"
 				description={"Please wait..."}
 			/>
 			<CustomLoadingSpinner
 				size={"lg"}
 				variant={"solid"}
+				duration={20}
 				description={"Please wait..."}
 			/>
 
