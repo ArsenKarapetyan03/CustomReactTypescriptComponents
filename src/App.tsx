@@ -127,42 +127,42 @@ function App() {
 					]}
 			/>
 
-			<CustomNotification
-				message={
-					{
-						title: "Info Message",
-						content: "Hello World!",
-					}
-				}
-				open={openNotification}
-				setOpen={setOpenNotification}
-				duration={2000}
-			/>
-			<CustomNotification
-				message={
-					{
-						title: "Warning Message",
-						content: "Hello World!",
-					}
-				}
-				type="warning"
-				position="top-left"
-				autoClose={false}
-				open={openNotification}
-				setOpen={setOpenNotification}
-			/>
-			<CustomNotification
-				message={
-					{
-						title: "Success Message",
-						content: "Hello World!",
-					}
-				}
-				type="success"
-				position="bottom-left"
-				open={openNotification}
-				setOpen={setOpenNotification}
-			/>
+			{/*<CustomNotification*/}
+			{/*	message={*/}
+			{/*		{*/}
+			{/*			title: "Info Message",*/}
+			{/*			content: "Hello World!",*/}
+			{/*		}*/}
+			{/*	}*/}
+			{/*	open={openNotification}*/}
+			{/*	setOpen={setOpenNotification}*/}
+			{/*	duration={2000}*/}
+			{/*/>*/}
+			{/*<CustomNotification*/}
+			{/*	message={*/}
+			{/*		{*/}
+			{/*			title: "Warning Message",*/}
+			{/*			content: "Hello World!",*/}
+			{/*		}*/}
+			{/*	}*/}
+			{/*	type="warning"*/}
+			{/*	position="top-left"*/}
+			{/*	autoClose={false}*/}
+			{/*	open={openNotification}*/}
+			{/*	setOpen={setOpenNotification}*/}
+			{/*/>*/}
+			{/*<CustomNotification*/}
+			{/*	message={*/}
+			{/*		{*/}
+			{/*			title: "Success Message",*/}
+			{/*			content: "Hello World!",*/}
+			{/*		}*/}
+			{/*	}*/}
+			{/*	type="success"*/}
+			{/*	position="bottom-left"*/}
+			{/*	open={openNotification}*/}
+			{/*	setOpen={setOpenNotification}*/}
+			{/*/>*/}
 			<CustomNotification
 				message={
 					{
