@@ -78,7 +78,7 @@ export const CollapsiblePanel = (
 							<span className={titleStyles}>{panel.title}</span>
 						</button>
 
-						<div className={`transition-all duration-200 ease-in-out ${open ? "max-h-48" : "max-h-0"}`}>
+						<div className={`transition-all duration-200 ease-in-out ${open ? "max-h-80" : "max-h-0"}`}>
 							<div className={cn("border-t border-zinc-300 p-4", contentStyles)}>
 								{panel.content}
 							</div>
