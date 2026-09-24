@@ -8,3 +8,4 @@ export { CustomModal } from './CustomModal.tsx';
 export { CustomNotification } from './CustomNotification.tsx';
 export { CustomTabs } from './CustomTabs.tsx';
 export { EmptyState } from './EmptyState.tsx';
+export { cn } from '../lib/utils.ts';
