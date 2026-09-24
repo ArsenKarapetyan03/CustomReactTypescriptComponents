@@ -18,7 +18,7 @@ interface CollapsiblePanelProps extends HTMLAttributes<HTMLDivElement> {
 	icon?: boolean;
 }
 
-export function CollapsiblePanel(
+export const CollapsiblePanel = (
 	{
 		panels,
 		size = "md",
@@ -29,7 +29,7 @@ export function CollapsiblePanel(
 		contentStyles,
 		icon = true,
 		className,
-	}: CollapsiblePanelProps) {
+	}: CollapsiblePanelProps) => {
 
 	const [openPanels, setOpenPanels] = useState<number[]>(
 		accordion
